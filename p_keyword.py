@@ -1,5 +1,3 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
 from googleapiclient.discovery import build
 from isodate import parse_duration
 from googleapiclient.errors import HttpError
@@ -47,13 +45,4 @@ def get_key_wards(video_id):
     return keyward_list
 
 
-
-class keyword(Resource):
-    def get(self, video_id):
-        # id = 'nagclz9y8X0'
-
-        
-        re = get_key_wards(video_id)
-
-        return re
 
