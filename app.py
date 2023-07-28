@@ -104,10 +104,16 @@ class KeywordsApi(Resource):
         keywords = Keyword.query.all()
         return [{'id': keyword.id, 'user_id': keyword.user_id, 'keyword': keyword.keyword, 'time': keyword.time} for keyword in keywords]
 
+
+api.add_resource(UsersApi, "/users")
+api.add_resource(VideosApi, "/videos")
+api.add_resource(KeywordsApi, "/keywords")
+
 api.add_resource(keyword_api, "/keyword-api")
 api.add_resource(UserApi, "/user-api")
 
 api.add_resource(videoList, "/videoList")
+
 
 if __name__ == '__main__':
     with app.app_context():  # Add this line
