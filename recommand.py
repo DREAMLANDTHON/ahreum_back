@@ -30,10 +30,13 @@ def check_rate(search_ward):
     for idx in idx_list:
         sorted_list.append(int(idx))
     result = []
-    for i in sorted_list:
-        result.append(data_list[i])
-    result = result[0:5]
-    return result
+    try:
+        for i in sorted_list:
+            result.append(data_list[i])
+        result = result[0:5]
+        return result
+    except:
+        return {"messeage" : "gpt-3.5-turbo error please register your payment."}
 
 if __name__ == '__main__':
     r = check_rate('뉴진스')
