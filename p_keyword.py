@@ -1,5 +1,5 @@
-from flask import Flask, request, jsonify
-from flask_restful import Resource, Api, reqparse
+from flask import Flask, request
+from flask_restful import Resource, Api
 from googleapiclient.discovery import build
 from isodate import parse_duration
 from googleapiclient.errors import HttpError
@@ -48,7 +48,6 @@ def get_key_wards(video_id):
 
 
 
-
 class keyword(Resource):
     def post(self):
         try:
@@ -59,7 +58,6 @@ class keyword(Resource):
             video_id = args["video_id"]
             
             re = get_key_wards(video_id)
-            re = jsonify(re)
             return re
         
         except Exception as e:
