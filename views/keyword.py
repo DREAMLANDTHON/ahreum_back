@@ -1,5 +1,5 @@
-from flask import Flask, request
-from flask_restful import Resource, Api
+from flask import Flask, request, jsonify
+from flask_restful import Resource, Api, reqparse
 from googleapiclient.discovery import build
 from isodate import parse_duration
 from googleapiclient.errors import HttpError
@@ -48,12 +48,19 @@ def get_key_wards(video_id):
 
 
 
+
 class keyword(Resource):
-    def get(self, video_id):
-        # id = 'nagclz9y8X0'
+    def post(self):
+        try:
+            parser = reqparse.RequestParser()
+            parser.add_argument("video_id", type=str, required=True, help="User ID is required.")
+            args = parser.parse_args()
 
+            video_id = args["video_id"]
+            
+            re = get_key_wards(video_id)
+            re = jsonify(re)
+            return re
         
-        re = get_key_wards(video_id)
-
-        return re
-
+        except Exception as e:
+            return {'error': str(e)}
