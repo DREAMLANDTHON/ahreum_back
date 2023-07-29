@@ -24,7 +24,7 @@ def get_video_info(video_id):
         return None
     
 def get_key_wards(video_id):
-    title, des = get_video_info(video_id)
+    title, des, thum = get_video_info(video_id)
     openai.api_key = OPENAI_KEY
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",

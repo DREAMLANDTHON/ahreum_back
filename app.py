@@ -7,6 +7,7 @@ from datetime import datetime
 import time
 import os
 import recommand
+from y_data import y_data
 current_file_path = os.path.abspath(__file__)
 # 이 파일의 디렉토리 경로
 current_directory = os.path.dirname(current_file_path)
@@ -82,7 +83,8 @@ class keyword_api(Resource):
             key_data = Keyword(user_id=user.user_id, keyword = value, time = time)
             db.session.add(key_data)
         db.session.commit()
-        return re
+        detail = y_data().get_video_detail(args['video_id'])
+        return detail
     
 class UserApi(Resource):
     def post(self):
@@ -141,7 +143,12 @@ class KeywordsApi(Resource):
         parser.add_argument('user_id', type=str)
         args = parser.parse_args()
         keywords = Keyword.query.filter_by(user_id=args['user_id']).all()
-        return [{'keyword': keyword.keyword} for keyword in keywords]
+        keyword_list = []
+        for keyword in keywords:
+            keyword_list.append(keyword.keyword)
+        return {'keyword': keyword_list}
+
+
 
 api.add_resource(UsersApi, "/users")
 api.add_resource(VideosApi, "/videos")

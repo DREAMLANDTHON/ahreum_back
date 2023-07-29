@@ -12,7 +12,7 @@ def check_rate(search_ward):
     data_list = y.get_video_data()
     title_list = []
     for data in data_list:
-        title_list.append(data['title'])
+        title_list.append(data['YouTubeBigBoxs'][0]['title'])
     response = openai.ChatCompletion.create(
     model="gpt-3.5-turbo",
     messages=[
